@@ -20,11 +20,8 @@
             [status-im.utils.ethereum.abi-spec :as abi-spec]
             [status-im.native-module.core :as status]
             [status-im.utils.security :as security]
-            [status-im.js-dependencies :as dependencies]
             [status-im.utils.types :as types])
   (:refer-clojure :exclude [name symbol]))
-
-(def utils dependencies/web3-utils)
 
 (def snt-contracts
   {:mainnet "0x744d70fdbe2ba4cf95131626614a1763df805b9e"

@@ -147,7 +147,7 @@
               :method  constants/web3-get-logs
               :params  [{:address (keys chain-tokens)
                          :fromBlock from-block
-                         :topics    [constants/event-transfer-hash from to]}]}
+                         :topics    [(constants/event-transfer-hash) from to]}]}
         payload (.stringify js/JSON (clj->js args))]
     (status/call-private-rpc payload
                              (response-handler web3 current-block-number chain-tokens direction ethereum/handle-error cb))))

@@ -1,7 +1,5 @@
 (ns status-im.utils.db
-  (:require [clojure.string :as string]
-            [cljs.spec.alpha :as spec]
-            [status-im.js-dependencies :as dependencies]
+  (:require [cljs.spec.alpha :as spec]
             [status-im.utils.ethereum.core :as ethereum]))
 
 (defn valid-public-key? [s]

@@ -2,17 +2,17 @@
   (:require [status-im.js-dependencies :as dependencies]
             [status-im.utils.ethereum.core :as ethereum]))
 
-(def utils dependencies/web3-utils)
+(defn utils [] (dependencies/web3-utils))
 
 (defn to-wei
   [s]
   (when s
-    (.toWei utils s)))
+    (.toWei (utils) s)))
 
 (defn from-wei
   [s]
   (when s
-    (.fromWei utils s)))
+    (.fromWei (utils) s)))
 
 (defn get-settings
   [db]
