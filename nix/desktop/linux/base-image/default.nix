@@ -1,8 +1,7 @@
-{ pkgs, stdenv, fetchurl }:
-
-with pkgs;
+{ stdenv, callPackage, fetchurl, nodejs, unzip }:
 
 let
+  ubuntu-server = callPackage ../../ubuntu-server { target-os = "linux"; inherit nodejs; };
   package = stdenv.mkDerivation rec {
     name = "StatusImAppImage";
     version = "20190515";
@@ -15,7 +14,7 @@ let
         }
       else throw "${name} is not supported on ${stdenv.hostPlatform.system}";
 
-    nativeBuildInputs = [ unzip ];
+    nativeBuildInputs = [ unzip ubuntu-server ];
 
     phases = [ "unpackPhase" ];
     unpackPhase = ''
@@ -23,12 +22,12 @@ let
       unzip $src -d $out/src
     '';
 
-    meta = {
+    meta = with stdenv.lib; {
       description = "A base image for Linux Status Desktop release distributions";
       homepage = https://desktop-app-files.ams3.digitaloceanspaces.com/;
-      license = stdenv.lib.licenses.gpl3;
-      maintainers = [ stdenv.lib.maintainers.pombeirp ];
-      platforms = stdenv.lib.platforms.linux;
+      license = licenses.gpl3;
+      maintainers = [ maintainers.pombeirp ];
+      platforms = platforms.linux;
     };
   };
 

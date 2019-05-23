@@ -6,7 +6,7 @@ with stdenv;
 
 let
   platform = callPackage ../platform.nix { inherit target-os; };
-  linuxPlatform = callPackage ./linux { inherit status-go; };
+  linuxPlatform = callPackage ./linux { inherit status-go nodejs; };
   darwinPlatform = callPackage ./macos { inherit status-go darwin; };
   windowsPlatform = callPackage ./windows { };
   snoreNotifySources = callPackage ./cmake/snorenotify { };
@@ -28,8 +28,8 @@ in
       file
       snoreNotifySources
       qtkeychainSources
-    ] ++ lib.catAttrs "buildInputs" selectedSources ++
-         (builtins.attrValues nodeInputs);
+    ] ++ lib.catAttrs "buildInputs" selectedSources
+      ++ (builtins.attrValues nodeInputs);
 
     shellHook = lib.concatStrings (lib.catAttrs "shellHook" (selectedSources ++ [ snoreNotifySources qtkeychainSources ]));
   }
